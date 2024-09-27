@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 function App() {
-  const [valueCategory, setValueCategory] = useState(28);
+  const [valueCategory, setValueCategory] = useState([]);
   const [movies, setMovies] = useState([]);
   const inputSearch = useRef();
   const [searchData, setSearchData] = useState([]);
@@ -27,7 +27,7 @@ function App() {
         `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genre}&language=pt-BR`
       );
 
-      const filteredMovies = movies.data.results.slice(0, 10);
+      const filteredMovies = movies.data.results.slice(0, 20);
 
       setMovies(filteredMovies);
     } catch (error) {
@@ -53,7 +53,7 @@ function App() {
 
   useEffect(() => {
     listCategory();
-    listMovies();
+    listMovies(valueCategory);
   }, []);
 
   return (
@@ -67,6 +67,7 @@ function App() {
             className="h-10 shadow-md rounded-full p-4"
             placeholder="Pesquise por filmes"
             ref={inputSearch}
+            onChange={() => searchMovie(inputSearch)}
           />
           <button
             className="bg-blue-500 w-24 rounded-full text-white text-sm active:scale-95"
@@ -90,7 +91,7 @@ function App() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-5 mt-4">
-            {searchData.length > 0
+            {searchData.length > 0 
               ? searchData.map((search, index) => (
                   <div
                     className="rounded-lg overflow-hidden shadow-lg relative"
