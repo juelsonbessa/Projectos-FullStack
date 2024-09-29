@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Header from "./components/header/header";
+import FormLogin from "./components/form_login/form";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+      <Header></Header>
+
+      <div className="flex flex-col mx-auto max-w-4xl h-lvh gap-10 mt-10">
+        <div className="flex md:justify-between">
+          <h5 className="text-blue-950  text-md md:text-2xl mr-10 md:mr-0">Login de agendamento.</h5>
+
+          <div className="flex gap-2">
+            <span className="text-sm text-slate-800 hidden md:flex">Selecionar linguagem</span>
+            <select
+              defaultValue="1"
+              className="border border-slate-600 rounded-md pr-6"
+            >
+              <option value="1" disabled>Selecionar linguagem</option>
+              <option value="2">Portugues</option>
+              <option value="3">Ingles</option>
+            </select>
+          </div>
+        </div>
+        <p className="text-blue-950 text-md md:text-2xl w-full md:w-3/5 text-center md:text-left">
+          Se é a primeira vez que que usa este serviço, por favor clique em novo
+          usuário.
         </p>
+
+        <FormLogin></FormLogin>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
