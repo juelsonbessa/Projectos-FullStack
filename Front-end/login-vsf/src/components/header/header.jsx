@@ -1,6 +1,6 @@
 import logoLogin from "../../assets/login.svg";
 
-function Header() {
+export function Header() {
   return (
     <div className="bg-blue-950 w-lvw">
       <div className="mx-auto max-w-4xl">
@@ -9,5 +9,3 @@ function Header() {
     </div>
   );
 }
-
-export default Header;
