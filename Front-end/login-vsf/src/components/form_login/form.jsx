@@ -1,15 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function FormLogin() {
   const { t } = useTranslation();
-  const [captcha, setCaptcha] = useState()
+  const [captcha, setCaptcha] = useState("");
 
-  const generateCaptchaValidade = (value) => {
-    setCaptcha(value)
-  }
+  const generateCaptcha = () => {
+    const randomCaptcha = Math.random().toString(36).slice(8).toUpperCase();
+
+    setCaptcha(randomCaptcha);
+  };
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
   return (
     <div className="w-full md:w-3/5 flex flex-col gap-5 md:gap-10">
       <div className="flex flex-col gap-3">
@@ -36,12 +43,15 @@ export function FormLogin() {
       </div>
 
       <div className="flex items-center gap-5 w-full border border-slate-600 rounded-md p-1">
-        <div className="w-4/6 h-full bg-slate-950 flex items-center justify-center">
-          <span className="text-white text-5xl">hjkggf</span>
+        <div className="w-4/6 h-full flex items-center justify-center">
+          <span className="text-blue-950 text-5xl">{captcha}</span>
         </div>
         <div className="flex flex-col w-full">
           <div className="flex items-center gap-1">
-            <span className="cursor-pointer">
+            <span
+              className="cursor-pointer active:rotate-180 duration-300 transition-all ease-in-out"
+              onClick={generateCaptcha}
+            >
               <FontAwesomeIcon icon={faRotateRight} />
             </span>
             <p>{t("insertextImg")}</p>
@@ -62,12 +72,15 @@ export function FormLogin() {
       </div>
 
       <div className="flex justify-between md:justify-normal w-full md:w-5/6 gap-14">
-        <span className="text-sm cursor-pointer hover:text-orange-500">{t("forgotPassword")}?</span>
-        <span className="text-sm cursor-pointer hover:text-orange-500">{t("newUser")}?</span>
+        <span className="text-sm cursor-pointer hover:text-orange-500">
+          {t("forgotPassword")}?
+        </span>
+        <span className="text-sm cursor-pointer hover:text-orange-500">
+          {t("newUser")}?
+        </span>
       </div>
 
       <p className="text-center text-sm">{t("registrationExpire")}</p>
     </div>
   );
 }
-
