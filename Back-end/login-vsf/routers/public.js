@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import express from "express";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.get("/login", async (req, res) => {
   try {
@@ -14,11 +14,9 @@ router.get("/login", async (req, res) => {
       where: { email: dataUsers.email },
     });
 
-    if (!user) {
-      res.json({ message: "Usuario não encontrado na base de dados" });
-    }
+    !user && res.json({ message: "Usuario não encontrado na base de dados" });
 
-    const token = jwt.sign({id: user.id}, JWT_SECRET, {expiresIn: "1d"})
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1d" });
 
     res.json(token);
   } catch (error) {
