@@ -18,6 +18,8 @@ router.get("/login", async (req, res) => {
 
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1d" });
 
+
+
     res.json(token);
   } catch (error) {
     res.json({ message: "Erro ao efetuar login", error });
