@@ -1,15 +1,24 @@
-import { faHome, faSearch, faStar, faTasks } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faSearch,
+  faStar,
+  faTasks,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import TextMenu from "../menu/textMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Sidebar() {
+  
   return (
     <div className="flex flex-col gap-8 w-full">
-      <div className="flex gap-3">
-        <div className="w-12 h-12 bg-blue-800 rounded-full"></div>
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center">
+            <FontAwesomeIcon icon={faUser} className="animate-pulse text-blue-500"/>
+        </div>
         <div className="flex flex-col">
           <h6 className="text-sm font-medium">Juelson Junior</h6>
-          <span className="text-xs text-gray-400">
+          <span className="text-xs text-blue-200">
             juelsoncanbiote@gmail.com
           </span>
         </div>
@@ -28,12 +37,27 @@ function Sidebar() {
       </div>
 
       <div className="flex flex-col gap-4 w-full">
-      <TextMenu icon={faStar} text={"Importante"} linkAba="/list-important" />
-      <TextMenu icon={faTasks} text={"Concluidas"} linkAba="/list-done" />
-      <TextMenu icon={faHome} text={"Tarefas"} linkAba="/" />
+        <TextMenu
+          icon={faStar}
+          text={"Importante"}
+          linkAba="/list-important"
+          contTasks={50}
+        />
+        <TextMenu
+          icon={faTasks}
+          text={"Concluidas"}
+          linkAba="/list-done"
+          contTasks={5}
+        />
+        <TextMenu
+          icon={faHome}
+          text={"Tarefas"}
+          linkAba="/"
+          contTasks={20}
+        />
       </div>
     </div>
   );
 }
 
-export default Sidebar
+export default Sidebar;
