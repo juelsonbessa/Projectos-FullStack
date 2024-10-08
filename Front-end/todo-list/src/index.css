@@ -11,3 +11,13 @@ body {
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
+
+.switch-theme{
+    @apply w-12 h-12 rounded-md cursor-pointer
+}
+.switch-theme:hover{
+    box-shadow: 0px 0px 5px #ffffff68;
+}
+.switch-theme:active{
+    transform: scale(0.8);
+}

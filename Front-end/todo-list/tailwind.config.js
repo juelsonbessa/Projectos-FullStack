@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
+        'searchImg': "url('/bgSearchTask.svg')",
         'importantImg': "url('/bgTaskImprtant.svg')",
         'doneImg': "url('/bgTaskDone.svg')",
         'homeImg': "url('/bgListTasks.svg')"

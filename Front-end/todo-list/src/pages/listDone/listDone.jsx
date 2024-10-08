@@ -1,33 +1,25 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TextAba from "../../componets/info-aba/textAba";
-import Task from "../../componets/tasks/task";
+import TextAba from "../../components/info-aba/textAba";
+import Task from "../../components/tasks/task";
 import {
   faStar,
-  faEllipsisH,
   faCheckCircle,
   faTasks,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "../../componets/sidebar/sidebar";
+import Sidebar from "../../components/sidebar/sidebar";
 
 function ListDone() {
   return (
     <div className="flex">
-      <div className="bg-slate-900 py-8 h-lvh p-2 text-white w-96">
+      <div className="bg-slate-900 py-8 h-lvh p-2 text-white w-11 md:w-96">
         <Sidebar />
       </div>
 
       <div className="bg-doneImg w-lvw h-lvh p-7 flex flex-col justify-between gap-5">
-        <div className="flex items-center justify-between">
-          <TextAba icon={faTasks} text={"Concluidas"} />
-
-          <div>
-            <FontAwesomeIcon
-              icon={faEllipsisH}
-              className="text-xl text-white hover:bg-gray-700 rounded-md p-1 w-5 cursor-pointer"
-            />
-          </div>
+      <div className="flex items-center justify-start">
+          <TextAba icon={faTasks} text={"Tarefas"} />
         </div>
 
         <div className="w-full h-full overflow-y-scroll no-scrollbar scroll-smooth flex flex-col gap-1">
