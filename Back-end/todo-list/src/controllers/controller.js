@@ -3,7 +3,7 @@ import allServices from "../services/service.js";
 const listTaskFront = async (req, res) => {
   try {
     const tasks = await allServices.listTaskBD();
-    res.status(200).json(tasks);
+    res.status(200).json(tasks);  
 
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar tarefas", error });

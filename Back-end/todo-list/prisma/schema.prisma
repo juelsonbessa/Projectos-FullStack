@@ -14,8 +14,8 @@ datasource db {
 }
 
 model Tasks {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  task      String   @unique
-  complete  Boolean
-  createAt  DateTime @default(now())
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId                   
+  task     String   @unique                                      
+  isDone   Boolean                                               
+  createAt DateTime @default(now())                              
 }

@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/search" element={< Search />}/>
+        <Route path="/search/:id" element={< Search />}/>
         <Route path="/list-important" element={< ListImportant />}/>
         <Route path="/list-done" element={< ListDone />}/>
         <Route path="/" element={< ListTask />}/>
