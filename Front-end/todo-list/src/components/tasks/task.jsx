@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DetailsTasks from "../details-task/details-task";
 import { useState } from "react";
 
-function Task({ iconCheck, text, iconStar }) {
+function Task({ iconCheck, text, idTask, iconStar }) {
   const [detailTask, setDetailTask] = useState(false)
 
   const showDetails = () => {
@@ -24,7 +24,7 @@ function Task({ iconCheck, text, iconStar }) {
         />
       </div>
 
-      {detailTask && <DetailsTasks />}
+      {detailTask && <DetailsTasks id={idTask} />}
     </>
   );
 }

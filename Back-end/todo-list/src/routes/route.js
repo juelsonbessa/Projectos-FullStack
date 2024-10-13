@@ -1,11 +1,18 @@
-import express from 'express'
-import allControllers from '../controllers/controller.js'
+import express from "express";
+import {
+  listTaskFront,
+  insertTaskFront,
+  delTaskFront,
+  editTaskFront,
+  detailTaskFront,
+} from "../controllers/controller.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/list-tasks', allControllers.listTaskFront)
-router.post('/insert-task', allControllers.insertTaskFront)
-router.delete('/del-task/:id', allControllers.delTaskFront)
-router.put('/edit-task', allControllers.editTaskFront)
+router.get("/list-tasks", listTaskFront);
+router.post("/insert-task", insertTaskFront);
+router.delete("/del-task/:id", delTaskFront);
+router.put("/edit-task", editTaskFront);
+router.get("/details-task/:id", detailTaskFront);
 
-export default router
+export default router;

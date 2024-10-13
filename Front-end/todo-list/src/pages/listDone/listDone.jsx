@@ -13,7 +13,7 @@ import Sidebar from "../../components/sidebar/sidebar";
 function ListDone() {
   return (
     <div className="flex">
-      <div className="bg-slate-900 py-8 h-lvh p-2 text-white w-11 md:w-96">
+      <div className="bg-slate-900 py-8 h-lvh p-2 text-white w-12 md:w-96">
         <Sidebar />
       </div>
 

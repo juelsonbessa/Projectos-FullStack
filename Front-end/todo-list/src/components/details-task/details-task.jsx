@@ -1,7 +1,26 @@
 import { faCheckCircle, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import api from "../../service/api";
 
-function DetailsTasks() {
+function DetailsTasks({id}) {
+  const [detailsTasks, setDetailsTasks] = useState()
+
+  const taskDetails = async() => {
+    try {
+      const dataTask = await api.get(`/details-task/${id}`)
+
+      setDetailsTasks(dataTask.data)
+    } catch (error) {
+      console.log(`Erro na listagem dos detalhes: ${error}`);
+    }
+  }
+
+  useEffect(() => {
+    taskDetails()
+    console.log(detailsTasks)
+  }, [])
+  
   return (
     <div className="bg-slate-900 py-8 h-lvh p-2 text-white absolute right-0 top-0">
       <div className="flex flex-col justify-between h-full">
@@ -19,7 +38,7 @@ function DetailsTasks() {
               <textarea
                 className="bg-transparent w-full outline-none resize-none overflow-y-scroll no-scrollbar"
                 cols="30"
-                defaultValue={"Nome da tarefa"}
+                defaultValue={detailsTasks.task}
               ></textarea>
 
               <FontAwesomeIcon

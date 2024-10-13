@@ -30,7 +30,7 @@ function ListTask() {
 
   return (
     <div className="flex">
-      <div className="bg-slate-900 py-8 h-lvh p-2 text-white w-11 md:w-96">
+      <div className="bg-slate-900 py-8 h-lvh p-2 text-white w-12 md:w-96">
         <Sidebar />
       </div>
 
@@ -45,6 +45,7 @@ function ListTask() {
               key={task.id}
               iconCheck={faCheckCircle}
               text={task.task}
+              idTask={task.id}
               iconStar={faStar}
             />
           ))}
