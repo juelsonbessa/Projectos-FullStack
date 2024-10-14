@@ -1,13 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DetailsTasks from "../details-task/details-task";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Task({ iconCheck, text, idTask, iconStar }) {
-  const [detailTask, setDetailTask] = useState(false)
+  const [selectId, setSelectId] = useState(null);
 
-  const showDetails = () => {
-    setDetailTask(!detailTask)
-  }
+  const showDetails = (id) => {
+    if(selectId === id){
+      setSelectId(null)
+    }else{
+      setSelectId(id)
+    }
+  };
   return (
     <>
       <div className="flex items-center justify-between w-full bg-slate-900 p-2 py-3 rounded-md">
@@ -16,15 +20,22 @@ function Task({ iconCheck, text, idTask, iconStar }) {
             icon={iconCheck}
             className="text-gray-500 cursor-pointer"
           />
-          <span className="text-white cursor-pointer" onClick={showDetails}>{text}</span>
+          <span
+            className="text-white cursor-pointer"
+            onClick={() => showDetails(idTask)}
+          >
+            {text}
+          </span>
         </div>
         <FontAwesomeIcon
           icon={iconStar}
           className="text-gray-500 cursor-pointer"
         />
-      </div>
 
-      {detailTask && <DetailsTasks id={idTask} />}
+        {selectId !== null && (
+          <DetailsTasks id={selectId} onClose={() => setSelectId(null)} />
+        )}
+      </div>
     </>
   );
 }
