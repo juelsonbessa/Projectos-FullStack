@@ -9,5 +9,5 @@ app.use('/', allRouters)
 
 app.listen(3000, () => console.log(`Servidor rodandoooo🚀`))
 
-//junior
-//9HKZ7mKeGmV0cJAX
+//juniorX
+//9HKZ7mKeGmV0cJA

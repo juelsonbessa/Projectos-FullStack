@@ -1,8 +1,6 @@
 import { useState } from "react";
-import TextAba from "../../components/info-aba/textAba";
 import Task from "../../components/tasks/task";
 import {
-  faHome,
   faStar,
   faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";

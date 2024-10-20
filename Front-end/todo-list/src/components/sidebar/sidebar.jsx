@@ -39,16 +39,10 @@ function Sidebar() {
           >
             <FontAwesomeIcon icon={faSearch} />
           </button>
-        </div>
+        </div> 
       </form>
 
       <div className="flex flex-col gap-4 w-full">
-        <TextMenu
-          icon={faStar}
-          text={"Importante"}
-          linkAba="/list-important"
-          contTasks={50}
-        />
         <TextMenu
           icon={faTasks}
           text={"Concluidas"}

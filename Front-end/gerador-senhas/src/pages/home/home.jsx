@@ -18,7 +18,7 @@ function Home() {
 
   function handleInputRange(event) {
     setSizePass(event.target.value);
-
+    
     setTextSizePass(event.target.value);
   }
 

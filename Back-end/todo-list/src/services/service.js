@@ -24,7 +24,7 @@ export const insertTaskBD = async (taskInfo) => {
     const insertBD = await prisma.tasks.create({
       data: {
         task: taskInfo,
-        complete: false,
+        isDone: false,
       },
     });
 

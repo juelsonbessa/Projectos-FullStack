@@ -1,31 +1,20 @@
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext, useEffect, useState } from "react";
 import TextAba from "../../components/info-aba/textAba";
 import Task from "../../components/tasks/task";
 import {
   faHome,
   faStar,
   faCheckCircle,
-  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../../components/sidebar/sidebar";
-import api from "../../service/api.js";
+import InsertTask from "../../components/insert-task/insert-task.jsx";
+import { TaskContext } from "../../contexts/taskContext.jsx";
 
 function ListTask() {
-  const [tasks, setTasks] = useState([]);
-
-  const listTasks = async () => {
-    try {
-      const dataTaks = await api.get("/list-tasks");
-
-      setTasks(dataTaks.data);
-    } catch (error) {
-      console.log(`Erro na listagem: ${error}`);
-    }
-  };
+  const { tasks, isLoading, listTaks } = useContext(TaskContext);
 
   useEffect(() => {
-    listTasks();
+    listTaks();
   }, []);
 
   return (
@@ -39,26 +28,23 @@ function ListTask() {
           <TextAba icon={faHome} text={"Tarefas"} />
         </div>
 
-        <div className="w-full h-full overflow-y-scroll no-scrollbar scroll-smooth flex flex-col gap-1">
-          {tasks.map((task) => (
-            <Task
-              key={task.id}
-              iconCheck={faCheckCircle}
-              text={task.task}
-              idTask={task.id}
-              iconStar={faStar}
-            />
-          ))}
+        <div className="w-full h-full overflow-y-scroll no-scrollbar scroll-smooth flex flex-col gap-1 items-center">
+          {isLoading ? (
+            <div className="w-9 h-9 border-t-4 border-blue-200 rounded-full animate-spin"></div>
+          ) : (
+            tasks.map((task, index) => (
+              <Task
+                key={index}
+                iconCheck={faCheckCircle}
+                text={task.task}
+                idTask={task.id}
+                iconStar={faStar}
+              />
+            ))
+          )}
         </div>
 
-        <div className="flex items-center gap-3 bg-slate-900 rounded-md p-1 hover:bg-slate-800 duration-300 ease-in-out">
-          <FontAwesomeIcon icon={faPlus} className="text-white" />
-          <input
-            type="text"
-            placeholder="Adicionar tarefa"
-            className="bg-transparent w-full h-full py-3 placeholder-white text-white outline-none"
-          />
-        </div>
+        <InsertTask />
       </div>
     </div>
   );
