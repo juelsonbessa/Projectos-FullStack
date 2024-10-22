@@ -4,7 +4,6 @@ import TextAba from "../../components/info-aba/textAba";
 import Task from "../../components/tasks/task";
 import {
   faStar,
-  faCheckCircle,
   faTasks,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +13,8 @@ import { getAllTasks } from "../../utils/functions";
 function ListDone() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const filterTaskDone = tasks.filter((task) => task.isDone == true)
 
   useEffect(() => {
     getAllTasks("list-tasks", setTasks, setIsLoading);
@@ -34,13 +35,12 @@ function ListDone() {
           {isLoading ? (
             <div className="w-9 h-9 border-t-4 border-blue-200 rounded-full animate-spin"></div>
           ) : (
-            tasks.map((task, index) => (
+            filterTaskDone.map((task, index) => (
               <Task
                 key={index}
-                iconCheck={faCheckCircle}
+                isDone={task.isDone}
                 text={task.task}
                 idTask={task.id}
-                iconStar={faStar}
               />
             ))
           )}

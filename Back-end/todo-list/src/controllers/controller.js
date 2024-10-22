@@ -4,6 +4,7 @@ import {
   delTaskBD,
   editTaskBD,
   detailsTaskBD,
+  countTaskBD,
 } from "../services/service.js";
 
 export const listTaskFront = async (req, res) => {
@@ -20,7 +21,7 @@ export const insertTaskFront = async (req, res) => {
     const dateTask = req.body;
 
     const insert = await insertTaskBD(dateTask.task);
-    res.status(200).json(insert);
+    res.status(200).json({ message: "Tarefa inserida com sucesso" });
   } catch (error) {
     res.status(500).json({ message: "Erro ao inserir tarefas", error });
   }
@@ -32,7 +33,7 @@ export const delTaskFront = async (req, res) => {
 
     const del = await delTaskBD(taskID);
 
-    res.status(200).json(del);
+    res.status(200).json({ message: "Mensagem apagada com sucesso" });
   } catch (error) {
     res.status(500).json({ message: "Erro ao deletar tarefa", error });
   }
@@ -47,7 +48,7 @@ export const editTaskFront = async (req, res) => {
       taskInfo.task,
       taskInfo.isDone
     );
-    res.status(200).json(update);
+    res.status(200).json({ message: "Tarefa editada com sucesso" });
   } catch (error) {
     res.status(500).json({ message: "Erro ao editar tarefa", error });
   }
@@ -68,5 +69,16 @@ export const detailTaskFront = async (req, res) => {
     res
       .status(500)
       .json({ message: "Erro ao visualizar detalhes da tarefa", error });
+  }
+};
+
+export const countTaskFront = async (req, res) => {
+  try {
+    const count = await countTaskBD();
+    res.status(200).json(count);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erro ao contar items na banco de dados", error });
   }
 };

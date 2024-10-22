@@ -7,8 +7,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TextMenu from "../menu/textMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext, useEffect } from "react";
+import { TaskContext } from "../../contexts/taskContext";
 
 function Sidebar() {
+  const { countTasks, count, tasks } = useContext(TaskContext);
+
+  const filterTaskDone = tasks.filter((task) => task.isDone == true)
+
+  useEffect(() => {
+    countTasks()
+  }, [])
+
   return (
     <div className="flex flex-col gap-8 w-full">
       <div className="flex items-center justify-center md:justify-normal gap-0 md:gap-3">
@@ -39,7 +49,7 @@ function Sidebar() {
           >
             <FontAwesomeIcon icon={faSearch} />
           </button>
-        </div> 
+        </div>
       </form>
 
       <div className="flex flex-col gap-4 w-full">
@@ -47,9 +57,9 @@ function Sidebar() {
           icon={faTasks}
           text={"Concluidas"}
           linkAba="/list-done"
-          contTasks={5}
+          contTasks={filterTaskDone.length}
         />
-        <TextMenu icon={faHome} text={"Tarefas"} linkAba="/" contTasks={20} />
+        <TextMenu icon={faHome} text={"Tarefas"} linkAba="/" contTasks={count} />
       </div>
     </div>
   );

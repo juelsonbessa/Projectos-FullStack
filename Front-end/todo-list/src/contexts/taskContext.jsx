@@ -1,11 +1,12 @@
 import { createContext, useState } from "react";
-import { getAllTasks, insertTask } from "../utils/functions";
+import { countTask, getAllTasks, insertTask } from "../utils/functions";
 
 export const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [count, setCount] = useState(0);
 
   const listTaks = () => {
     getAllTasks("list-tasks", setTasks, setIsLoading);
@@ -16,8 +17,13 @@ export const TaskProvider = ({ children }) => {
     listTaks();
   };
 
+  const countTasks = () => {
+    countTask("count-task", setCount)
+  }  
+  
+
   return (
-    <TaskContext.Provider value={{ tasks, isLoading, listTaks, addTask }}>
+    <TaskContext.Provider value={{ tasks, isLoading, listTaks, addTask, countTasks, count }}>
       {children}
     </TaskContext.Provider>
   );

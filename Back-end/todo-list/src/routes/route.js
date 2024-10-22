@@ -5,14 +5,16 @@ import {
   delTaskFront,
   editTaskFront,
   detailTaskFront,
+  countTaskFront,
 } from "../controllers/controller.js";
 
 const router = express.Router();
 
-router.get("/list-tasks", listTaskFront);
+router.get("/list-tasks", listTaskFront); 
 router.post("/insert-task", insertTaskFront);
-router.delete("/del-task/:id", delTaskFront);
+router.delete("/del-task/:id", delTaskFront);  
 router.put("/edit-task", editTaskFront);
 router.get("/details-task/:id", detailTaskFront);
+router.get("/count-task/", countTaskFront);
 
 export default router;

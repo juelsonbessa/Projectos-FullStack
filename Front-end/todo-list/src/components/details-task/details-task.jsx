@@ -1,16 +1,38 @@
 import {
   faCheckCircle,
   faStar,
+  faTrash,
   faWindowClose,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { formatData, getDetailsTask } from "../../utils/functions";
+import {
+  delTask,
+  editTask,
+  formatData,
+  getDetailsTask,
+} from "../../utils/functions";
+import { TaskContext } from "../../contexts/taskContext";
 
 function DetailsTasks({ id, onClose }) {
   const [detailsTasks, setDetailsTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [statusTask, setStatusTask] = useState(false);
+  const [valueEditTask, setValueEditTask] = useState();
+  const [loadingEditTask, setLoadingEditTask] = useState();
+  const { listTaks } = useContext(TaskContext);
+
+  const updateTask = () => {
+    editTask("edit-task", id, valueEditTask, statusTask, setLoadingEditTask);
+    setTimeout(() => {
+      listTaks();
+    }, 1500);
+  };
+
+  const taskDone = () => {
+    setStatusTask(!statusTask);
+  };
 
   useEffect(() => {
     getDetailsTask("details-task", setDetailsTasks, id, setIsLoading);
@@ -38,20 +60,26 @@ function DetailsTasks({ id, onClose }) {
                 <div className="flex items-center justify-center gap-6 w-full">
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-gray-500 cursor-pointer"
+                    className={`${
+                      statusTask ? "text-blue-500" : "text-gray-500"
+                    } cursor-pointer`}
+                    onClick={taskDone}
                   />
                   <textarea
                     className="bg-transparent w-full outline-none resize-none overflow-y-scroll no-scrollbar"
                     cols="30"
                     defaultValue={detail.task}
+                    onChange={(e) => setValueEditTask(e.target.value)}
                   ></textarea>
-
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    className="text-gray-500 cursor-pointer"
-                  />
                 </div>
               </div>
+              <button
+                className="rounded-md bg-slate-800 px-4 py-1 shadow-lg"
+                onClick={updateTask}
+                disabled={loadingEditTask}
+              >
+                {loadingEditTask ? "Salvando..." : "Actualizar"}
+              </button>
             </div>
 
             <div className="flex justify-center">

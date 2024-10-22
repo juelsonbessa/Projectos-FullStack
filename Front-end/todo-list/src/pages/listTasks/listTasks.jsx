@@ -3,8 +3,8 @@ import TextAba from "../../components/info-aba/textAba";
 import Task from "../../components/tasks/task";
 import {
   faHome,
-  faStar,
   faCheckCircle,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../../components/sidebar/sidebar";
 import InsertTask from "../../components/insert-task/insert-task.jsx";
@@ -35,10 +35,9 @@ function ListTask() {
             tasks.map((task, index) => (
               <Task
                 key={index}
-                iconCheck={faCheckCircle}
+                isDone={task.isDone}
                 text={task.task}
                 idTask={task.id}
-                iconStar={faStar}
               />
             ))
           )}

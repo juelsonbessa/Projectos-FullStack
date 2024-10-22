@@ -9,12 +9,10 @@ export const listTaskBD = async () => {
 
     return taskBD;
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Erro: Não existe nenhuma tarefa cadastrada na BD",
-        error,
-      });
+    res.status(500).json({
+      message: "Erro: Não existe nenhuma tarefa cadastrada na BD",
+      error,
+    });
   }
 };
 
@@ -58,7 +56,7 @@ export const editTaskBD = async (taskId, taskInfo, taskComplete) => {
       where: { id: taskId },
       data: {
         task: taskInfo,
-        complete: taskComplete,
+        isDone: taskComplete,
       },
     });
 
@@ -72,9 +70,28 @@ export const editTaskBD = async (taskId, taskInfo, taskComplete) => {
 
 //Detalhes tarefa
 export const detailsTaskBD = async (taskID) => {
-  const detailsBD = await prisma.tasks.findUnique({
-    where: { id: taskID },
-  });
+  try {
+    const detailsBD = await prisma.tasks.findUnique({
+      where: { id: taskID },
+    });
 
-  return detailsBD;
+    return detailsBD;
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erro: falha ao mostrar detalhes na BD", error });
+  }
+};
+
+//Contar tarefa
+export const countTaskBD = async () => {
+  try {
+    const countTask = await prisma.tasks.count();
+
+    return countTask;
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erro: falha ao contar items na BD", error });
+  }
 };
