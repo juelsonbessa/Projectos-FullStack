@@ -16,6 +16,26 @@ export const listTaskBD = async () => {
   }
 };
 
+export const searchTaskBD = async (taskInfo) => {
+  try {
+    const searchBD = await prisma.tasks.findMany({
+      where: {
+        task: {
+          contains: taskInfo,
+          mode: "insensitive",
+        },
+      },
+    });
+
+    return searchBD;
+  } catch (error) {
+    res.status(500).json({
+      message: "Erro: Não existe nenhuma tarefa na BD para essa pesquisa",
+      error,
+    });
+  }
+};
+
 //Inserindo tarefas
 export const insertTaskBD = async (taskInfo) => {
   try {

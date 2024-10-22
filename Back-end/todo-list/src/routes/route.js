@@ -6,11 +6,13 @@ import {
   editTaskFront,
   detailTaskFront,
   countTaskFront,
+  seachTaskFront,
 } from "../controllers/controller.js";
 
 const router = express.Router();
 
 router.get("/list-tasks", listTaskFront); 
+router.get("/search/:q", seachTaskFront); 
 router.post("/insert-task", insertTaskFront);
 router.delete("/del-task/:id", delTaskFront);  
 router.put("/edit-task", editTaskFront);

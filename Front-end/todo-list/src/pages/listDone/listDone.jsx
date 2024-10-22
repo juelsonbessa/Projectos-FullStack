@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextAba from "../../components/info-aba/textAba";
 import Task from "../../components/tasks/task";
-import {
-  faStar,
-  faTasks,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTasks } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../../components/sidebar/sidebar";
 import { getAllTasks } from "../../utils/functions";
+import InsertTask from "../../components/insert-task/insert-task";
 
 function ListDone() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const filterTaskDone = tasks.filter((task) => task.isDone == true)
+  const filterTaskDone = tasks.filter((task) => task.isDone == true);
 
   useEffect(() => {
     getAllTasks("list-tasks", setTasks, setIsLoading);
@@ -46,14 +42,7 @@ function ListDone() {
           )}
         </div>
 
-        <div className="flex items-center gap-3 bg-slate-900 rounded-md p-1 hover:bg-slate-800 duration-300 ease-in-out">
-          <FontAwesomeIcon icon={faPlus} className="text-white" />
-          <input
-            type="text"
-            placeholder="Adicionar tarefa"
-            className="bg-transparent w-full h-full py-3 placeholder-white text-white outline-none"
-          />
-        </div>
+        <InsertTask />
       </div>
     </div>
   );

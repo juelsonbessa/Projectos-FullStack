@@ -5,6 +5,7 @@ import {
   editTaskBD,
   detailsTaskBD,
   countTaskBD,
+  searchTaskBD,
 } from "../services/service.js";
 
 export const listTaskFront = async (req, res) => {
@@ -13,6 +14,17 @@ export const listTaskFront = async (req, res) => {
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar tarefas", error });
+  }
+};
+
+export const seachTaskFront = async (req, res) => {
+  try {
+    const searchData = req.params.q.replace(":", "")
+    const search = await searchTaskBD(searchData);
+
+    res.status(200).json(search);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao pesquisar tarefas", error });
   }
 };
 

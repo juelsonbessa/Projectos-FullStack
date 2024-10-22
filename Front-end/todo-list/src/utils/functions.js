@@ -40,6 +40,19 @@ export const getAllTasks = async (url, stateData, stateLoading) => {
   }
 };
 
+export const searchTasks = async (url, search, stateData, stateLoading) => {
+  stateLoading(true);
+  try {
+    const searchTask = await api.get(`/${url}/${search}`);
+
+    stateData(searchTask.data);
+  } catch (error) {
+    console.log(`Erro: ${error.message}`);
+  } finally {
+    stateLoading(false);
+  }
+};
+
 export const getDetailsTask = async (url, stateData, id, stateLoading) => {
   stateLoading(true);
   try {

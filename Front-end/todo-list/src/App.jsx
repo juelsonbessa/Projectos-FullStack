@@ -9,7 +9,7 @@ function App() {
     <TaskProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/search/:id" element={<Search />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/list-done" element={<ListDone />} />
           <Route path="/" element={<ListTask />} />
         </Routes>

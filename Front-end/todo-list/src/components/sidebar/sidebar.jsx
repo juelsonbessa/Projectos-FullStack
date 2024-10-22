@@ -1,23 +1,29 @@
 import {
   faHome,
   faSearch,
-  faStar,
   faTasks,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import TextMenu from "../menu/textMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TaskContext } from "../../contexts/taskContext";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const { countTasks, count, tasks } = useContext(TaskContext);
-
+  const [valueSearch, setValueSearch] = useState("")
   const filterTaskDone = tasks.filter((task) => task.isDone == true)
-
+  const navigate = useNavigate()
   useEffect(() => {
     countTasks()
   }, [])
+
+  const handleSearchTask = (e) => {
+    e.preventDefault()
+
+    navigate(`/search?q=${valueSearch}`)
+  }
 
   return (
     <div className="flex flex-col gap-8 w-full">
@@ -36,12 +42,13 @@ function Sidebar() {
         </div>
       </div>
 
-      <form action="">
+      <form onSubmit={handleSearchTask}>
         <div className="border border-gray-700 p-2 text-sm rounded-md border-b-2 border-b-gray-500 focus:border-b-white justify-between items-center hidden md:flex">
           <input
             type="text"
             placeholder="Pesquisar Tarefa"
             className="w-full bg-transparent outline-none text-sm"
+            onChange={(e) => setValueSearch(e.target.value)}
           />
           <button
             type="submit"
